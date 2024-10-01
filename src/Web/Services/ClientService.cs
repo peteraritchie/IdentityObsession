@@ -11,7 +11,13 @@ public class ClientService(IClientRepository clientRepository)
 {
 	public async Task<IEnumerable<Client>> GetClientsAsync(CancellationToken cancellationToken = default)
 	{
-		var domainClients = await clientRepository.FindClientsAsync(cancellationToken);
+		var domainClientsResult = await clientRepository.FindClientsAsync(cancellationToken);
+		if (!domainClientsResult.IsSuccess)
+		{
+			return [];
+		}
+
+		var domainClients = domainClientsResult.Value;
 		return domainClients.Select(ToModel);
 	}
 

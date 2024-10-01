@@ -9,24 +9,6 @@ namespace Pri.IdentityObsession.Web.Infrastructure;
 
 public class DatabaseContext : DbContext
 {
-	public static string DataSourcePath {
-		get
-		{
-			var localAppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-			return Path.Join(localAppDataPath, "clients.db");
-		}
-	}
-
-	public DbSet<Client> Clients { get; set; }
-
-#if true
-	// figure out why this is needed and why configuration isn't happening back at AddDbContextFactory in Program.cs
-	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-	{
-		optionsBuilder.UseSqlite($"Data Source={DataSourcePath}");
-	}
-#endif
-
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
 		modelBuilder.ApplyConfiguration(new ClientEntityTypeConfiguration());
@@ -66,5 +48,19 @@ public class DatabaseContext : DbContext
 		await AddAsync(client, cancellationToken);
 
 		await SaveChangesAsync(cancellationToken);
+	}
+	public DbSet<Client> Clients { get; set; }
+
+	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+	{
+		optionsBuilder.UseSqlite($"Data Source={DataSourcePath}");
+	}
+
+	public static string DataSourcePath {
+		get
+		{
+			var localAppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+			return Path.Join(localAppDataPath, "clients.db");
+		}
 	}
 }

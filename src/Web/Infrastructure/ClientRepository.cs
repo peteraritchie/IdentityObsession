@@ -54,9 +54,10 @@ public class ClientRepository(DatabaseContext dbContext, ISsnRegistry ssnRegistr
 		return newSsn;
 	}
 
-	public Task<IEnumerable<Client>> FindClientsAsync(CancellationToken _)
+	public Task<Result<IEnumerable<Client>>> FindClientsAsync(CancellationToken _)
 	{
-		return Task.FromResult<IEnumerable<Client>>(dbContext.Clients);
+		Result<IEnumerable<Client>> result = dbContext.Clients;
+		return Task.FromResult(result);
 	}
 
 	public Result<Ssn> GetClientSsn(Client client)
