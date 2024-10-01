@@ -1,5 +1,7 @@
 # IdentityObsession
 
+Example source code that adddresses [Identity Obsession](https://blog.peterritchie.com/posts/identity-obsession-and-domain-driven-design).
+
 ## Scaffolding
 
 ```powershell
