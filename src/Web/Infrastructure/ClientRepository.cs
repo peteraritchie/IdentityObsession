@@ -53,4 +53,14 @@ public class ClientRepository(DatabaseContext dbContext, ISsnRegistry ssnRegistr
 		ssnReservation.Commit();
 		return newSsn;
 	}
+
+	public Task<IEnumerable<Client>> FindClientsAsync(CancellationToken _)
+	{
+		return Task.FromResult<IEnumerable<Client>>(dbContext.Clients);
+	}
+
+	public Result<Ssn> GetClientSsn(Client client)
+	{
+		return dbContext.GetClientSsn(client);
+	}
 }

@@ -25,10 +25,3 @@ public sealed class SsnReservation(string value) : ISsnReservation
 
 	public string Value { get; } = value;
 }
-
-public interface ISsnReservation : IDisposable
-{
-	Result Commit();
-	void Release();
-	string Value { get; }
-}

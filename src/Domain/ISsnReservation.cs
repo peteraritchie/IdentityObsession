@@ -1,6 +1,10 @@
-﻿namespace Pri.IdentityObsession.Domain;
+﻿using Ardalis.Result;
 
-public interface ISsnReservation
+namespace Pri.IdentityObsession.Domain;
+
+public interface ISsnReservation : IDisposable
 {
-
+	Result Commit();
+	void Release();
+	string Value { get; }
 }

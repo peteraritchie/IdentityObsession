@@ -9,28 +9,29 @@ namespace Pri.IdentityObsession.Web.Infrastructure;
 
 public class DatabaseContext : DbContext
 {
-	private readonly ILogger<DatabaseContext> logger;
-	private readonly string dbPath;
+	public static string DataSourcePath {
+		get
+		{
+			var localAppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+			return Path.Join(localAppDataPath, "clients.db");
+		}
+	}
 
 	public DbSet<Client> Clients { get; set; }
 
-	public DatabaseContext(ILogger<DatabaseContext> logger)
-	{
-		this.logger = logger;
-		var localAppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-		dbPath = Path.Join(localAppDataPath, "clients.db");
-	}
-
+#if true
+	// figure out why this is needed and why configuration isn't happening back at AddDbContextFactory in Program.cs
 	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-		=> optionsBuilder.UseSqlite($"Data Source={dbPath}");
+	{
+		optionsBuilder.UseSqlite($"Data Source={DataSourcePath}");
+	}
+#endif
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
 		modelBuilder.ApplyConfiguration(new ClientEntityTypeConfiguration());
 
 		base.OnModelCreating(modelBuilder);
-
-		logger.LogInformation("DatabaseContext created. DB file: {dbPath}", dbPath);
 	}
 
 	public async Task<Result<Client>> GetClientBySsnAsync(Ssn ssn, CancellationToken cancellationToken)

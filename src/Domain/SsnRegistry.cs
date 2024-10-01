@@ -19,8 +19,3 @@ public sealed class SsnRegistry : ISsnRegistry
 	}
 }
 
-public interface ISsnRegistry
-{
-	Result<ISsnReservation> Reserve();
-	Result Commit(ISsnReservation reservation);
-}

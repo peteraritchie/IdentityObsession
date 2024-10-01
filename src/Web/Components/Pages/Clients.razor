@@ -1,0 +1,49 @@
+﻿@page "/client"
+@using Pri.IdentityObsession.Web.Models
+@using Pri.IdentityObsession.Web.Services
+@rendermode InteractiveServer
+@inject ClientService ClientService
+
+<h3>Clients</h3>
+
+@code {
+    private List<Client> clients = [];
+    Client client = new Client
+    {
+        GivenName = string.Empty,
+        FamilyName = string.Empty
+    };
+
+    async Task AddClientAsync()
+    {
+        if (!string.IsNullOrWhiteSpace(client.GivenName) && !string.IsNullOrWhiteSpace(client.FamilyName))
+        {
+            await ClientService.AddAsync(client);
+
+            clients = (await ClientService.GetClientsAsync()).ToList();
+
+            client = new Client
+            {
+	            GivenName = string.Empty,
+	            FamilyName = string.Empty
+            };
+        }
+        else
+        {
+            // TODO: validation error
+        }
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        clients = (await ClientService.GetClientsAsync()).ToList();
+    }
+}
+<ul>
+	@foreach (var client in clients)
+	{
+		<li>@client.GivenName @client.FamilyName (SSN: @(client.Ssn ?? "unassigned"))</li>
+	}
+</ul>
+<input @bind="client.GivenName" />
+<input @bind="client.FamilyName" />
+<button @onclick="AddClientAsync">Add client</button>

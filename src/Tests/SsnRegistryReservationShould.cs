@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.VisualStudio.TestPlatform.TestHost;
+﻿using Microsoft.VisualStudio.TestPlatform.TestHost;
 
 using Moq;
 
@@ -27,25 +26,5 @@ public class SsnRegistryReservationShould
 		using var reservation = reservationResult.Value;
 
 		Assert.Matches(@"^(?!0{3})(?!6{3})[0-8]\d{2}-(?!0{2})\d{2}-(?!0{4})\d{4}$", reservation.Value);
-	}
-}
-public class Integration : IClassFixture<WebApplicationFactory<Program>>
-{
-	private readonly WebApplicationFactory<Program> factory;
-
-	public Integration(WebApplicationFactory<Program> factory)
-	{
-		this.factory = factory;
-	}
-
-	[Theory]
-	[InlineData("/")]
-	public async Task HaveSuccessResultForEndpoint(string url)
-	{
-		var client = factory.CreateClient();
-
-		var response = await client.GetAsync(url);
-
-		response.EnsureSuccessStatusCode();
 	}
 }
