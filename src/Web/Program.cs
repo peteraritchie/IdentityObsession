@@ -1,5 +1,3 @@
-using Microsoft.EntityFrameworkCore;
-
 using Pri.IdentityObsession.Domain;
 using Pri.IdentityObsession.Web.Components;
 using Pri.IdentityObsession.Web.Infrastructure;
@@ -11,17 +9,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 builder.Services.AddSingleton<ISsnRegistry, SsnRegistry>();
-//builder.Services.AddSingleton<ClientService>();
 builder.Services.AddScoped<ClientService>();
 builder.Services.AddScoped<IClientRepository, ClientRepository>();
 builder.Services.AddDbContext<DatabaseContext>();
-#if true
-//builder.Services.AddDbContextFactory<DatabaseContext>();
-#else
-// figure out why this doesn't initialize the provider.
-builder.Services.AddDbContextFactory<DatabaseContext>(opt =>
-	opt.UseSqlite($"Data Source={DatabaseContext.DataSourcePath}"));
-#endif
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
