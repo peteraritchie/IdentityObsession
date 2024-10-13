@@ -1,13 +1,12 @@
 ﻿using Ardalis.Result;
 
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
 using Pri.IdentityObsession.Domain;
 
 namespace Pri.IdentityObsession.Web.Infrastructure;
 
-public class DatabaseContext : DbContext
+internal class DatabaseContext : DbContext
 {
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{

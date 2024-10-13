@@ -2,7 +2,7 @@
 
 namespace Pri.IdentityObsession.Domain;
 
-public sealed class SsnRegistry : ISsnRegistry
+internal sealed class SsnRegistry : ISsnRegistry
 {
 	public Result<ISsnReservation> Reserve()
 	{

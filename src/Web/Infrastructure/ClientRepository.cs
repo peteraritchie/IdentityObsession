@@ -6,7 +6,7 @@ using Pri.IdentityObsession.Domain;
 
 namespace Pri.IdentityObsession.Web.Infrastructure;
 
-public class ClientRepository(DatabaseContext dbContext, ISsnRegistry ssnRegistry) : IClientRepository
+internal class ClientRepository(DatabaseContext dbContext, ISsnRegistry ssnRegistry) : IClientRepository
 {
 	private readonly DatabaseContext dbContext = dbContext;
 	private readonly ISsnRegistry ssnRegistry = ssnRegistry;

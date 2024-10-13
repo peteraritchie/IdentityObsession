@@ -1,13 +1,12 @@
 ﻿using Ardalis.Result;
 
 using Pri.IdentityObsession.Domain;
-using Pri.IdentityObsession.Web.Infrastructure;
 
 using Client = Pri.IdentityObsession.Web.Models.Client;
 
 namespace Pri.IdentityObsession.Web.Services;
 
-public class ClientService(IClientRepository clientRepository)
+internal class ClientService(IClientRepository clientRepository)
 {
 	public async Task<IEnumerable<Client>> GetClientsAsync(CancellationToken cancellationToken = default)
 	{

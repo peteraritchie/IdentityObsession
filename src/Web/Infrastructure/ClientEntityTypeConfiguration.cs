@@ -5,7 +5,7 @@ using Pri.IdentityObsession.Domain;
 
 namespace Pri.IdentityObsession.Web.Infrastructure;
 
-public class ClientEntityTypeConfiguration : IEntityTypeConfiguration<Client>
+internal class ClientEntityTypeConfiguration : IEntityTypeConfiguration<Client>
 {
 	public void Configure(EntityTypeBuilder<Client> builder)
 	{

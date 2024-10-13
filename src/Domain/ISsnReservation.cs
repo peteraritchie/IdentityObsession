@@ -2,7 +2,7 @@
 
 namespace Pri.IdentityObsession.Domain;
 
-public interface ISsnReservation : IDisposable
+internal interface ISsnReservation : IDisposable
 {
 	Result Commit();
 	void Release();

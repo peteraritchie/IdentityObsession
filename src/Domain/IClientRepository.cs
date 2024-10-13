@@ -2,7 +2,7 @@
 
 namespace Pri.IdentityObsession.Domain;
 
-public interface IClientRepository
+internal interface IClientRepository
 {
 	Task<Result<Client>> FindBySsnAsync(Ssn ssn, CancellationToken cancellationToken);
 	Task<Result> SaveAsync(Client client, CancellationToken cancellationToken);

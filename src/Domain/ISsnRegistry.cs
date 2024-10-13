@@ -2,7 +2,7 @@
 
 namespace Pri.IdentityObsession.Domain;
 
-public interface ISsnRegistry
+internal interface ISsnRegistry
 {
 	Result<ISsnReservation> Reserve();
 	Result Commit(ISsnReservation reservation);

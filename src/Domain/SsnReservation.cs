@@ -2,7 +2,7 @@
 
 namespace Pri.IdentityObsession.Domain;
 
-public sealed class SsnReservation(string value) : ISsnReservation
+internal sealed class SsnReservation(string value) : ISsnReservation
 {
 	private bool disposed;
 

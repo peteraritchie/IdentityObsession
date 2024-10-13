@@ -1,6 +1,6 @@
 ﻿namespace Pri.IdentityObsession.Domain;
 
-public partial class Ssn
+internal partial class Ssn
 {
 	public static Ssn Parse(string? text)
 	{
